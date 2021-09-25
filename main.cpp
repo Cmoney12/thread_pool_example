@@ -6,9 +6,6 @@
 #include <queue>
 #include <functional>
 
-std::mutex queue_mutex;
-std::condition_variable cv;
-
 
 class thread_pool {
 public:
@@ -71,6 +68,8 @@ private:
     bool terminate_pool{};
     std::vector<std::thread> pool;
     bool stopped = false;
+    std::mutex queue_mutex;
+    std::condition_variable cv;
 };
 
 
