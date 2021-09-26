@@ -1,3 +1,10 @@
+//
+// Created by corey on 9/26/21.
+//
+
+#ifndef THREAD_POOL_THREAD_POOL_H
+#define THREAD_POOL_THREAD_POOL_H
+
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -5,7 +12,6 @@
 #include <condition_variable>
 #include <queue>
 #include <functional>
-
 
 class thread_pool {
 public:
@@ -80,19 +86,4 @@ void job() {
 }
 
 
-int main() {
-
-    auto *pool_ = new thread_pool();
-
-    pool_->allocate_pool();
-
-    std::function<void()> func_ = job;
-
-    pool_->add_job(func_);
-
-    pool_->add_job(func_);
-
-    delete pool_;
-
-    return 0;
-}
+#endif //THREAD_POOL_THREAD_POOL_H
