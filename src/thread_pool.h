@@ -19,6 +19,9 @@ std::condition_variable cv;
 class thread_pool {
 public:
 
+
+    std::vector<std::thread> pool;
+
     thread_pool() = default;
 
     ~thread_pool() {
@@ -81,7 +84,6 @@ public:
 private:
     std::queue<std::function<void()>> queue;
     bool terminate_pool{};
-    std::vector<std::thread> pool;
     bool stopped = false;
 };
 
