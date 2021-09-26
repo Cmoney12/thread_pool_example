@@ -13,6 +13,9 @@
 #include <queue>
 #include <functional>
 
+std::mutex queue_mutex;
+std::condition_variable cv;
+
 class thread_pool {
 public:
 
@@ -69,21 +72,18 @@ public:
         stopped = true;
     }
 
+    void job() {
+        for(int i = 0; i < 100; i++) {
+            std::cout << i << std::endl;
+        }
+    }
+
 private:
     std::queue<std::function<void()>> queue;
     bool terminate_pool{};
     std::vector<std::thread> pool;
     bool stopped = false;
-    std::mutex queue_mutex;
-    std::condition_variable cv;
 };
-
-
-void job() {
-    for(int i = 0; i < 100; i++) {
-        std::cout << i << std::endl;
-    }
-}
 
 
 #endif //THREAD_POOL_THREAD_POOL_H
