@@ -58,7 +58,6 @@ TEST_F(test, allocate_pool) {
 
     thread_pool_->shut_down();
 
-
 }
 
 #endif //THREAD_POOL_TEST_H

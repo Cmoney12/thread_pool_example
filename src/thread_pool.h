@@ -83,7 +83,7 @@ private:
     bool endless_loop = true;
 };
 
-void job() {
+std::function<void()> job() {
     for(int i = 0; i < 100; i++) {
         std::cout << i << std::endl;
     }
