@@ -34,7 +34,7 @@ public:
 TEST_F(test, job) {
     /* Tests the job output to see if both equal 100*/
     testing::internal::CaptureStdout();
-    thread_pool_->job();
+    job();
     std::string job_output = testing::internal::GetCapturedStdout();
     testing::internal::CaptureStdout();
     for(int i = 0; i < 100; i++)
@@ -55,6 +55,8 @@ TEST_F(test, allocate_pool) {
     unsigned int thread_pool_size = thread_pool_->pool.size();
 
     EXPECT_EQ(num_threads, thread_pool_size);
+
+    thread_pool_->shut_down();
 
 
 }

@@ -31,7 +31,7 @@ public:
     }
 
     void infinite_loop() {
-        while (true) {
+        while (false) {
             std::unique_lock<std::mutex> lock(queue_mutex);
             cv.wait(lock,[this]() {
                 return !queue.empty() || terminate_pool; });
@@ -60,6 +60,7 @@ public:
     }
 
     void shut_down() {
+        endless_loop = false;
         std::unique_lock<std::mutex> lock(queue_mutex);
         terminate_pool = true; // use this flag in condition.wait
 
@@ -75,17 +76,18 @@ public:
         stopped = true;
     }
 
-    void job() {
-        for(int i = 0; i < 100; i++) {
-            std::cout << i << std::endl;
-        }
-    }
-
 private:
     std::queue<std::function<void()>> queue;
     bool terminate_pool{};
     bool stopped = false;
+    bool endless_loop = true;
 };
+
+void job() {
+    for(int i = 0; i < 100; i++) {
+        std::cout << i << std::endl;
+    }
+}
 
 
 #endif //THREAD_POOL_THREAD_POOL_H
