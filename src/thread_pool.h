@@ -31,7 +31,7 @@ public:
     }
 
     void infinite_loop() {
-        while (false) {
+        while (endless_loop) {
             std::unique_lock<std::mutex> lock(queue_mutex);
             cv.wait(lock,[this]() {
                 return !queue.empty() || terminate_pool; });
